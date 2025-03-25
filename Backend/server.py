@@ -29,7 +29,7 @@ is_hacker = False
 
 with open('oauth_token') as fd:
     flag = fd.read()
-    
+
 cursor.execute("CREATE TABLE IF NOT EXISTS oauth_tokens (oauth_token TEXT)")
 cursor.execute("CREATE TABLE IF NOT EXISTS media (id SERIAL PRIMARY KEY, artist TEXT, song TEXT)")
 cursor.execute("INSERT INTO oauth_tokens VALUES (%s) ON CONFLICT DO NOTHING", (flag,))

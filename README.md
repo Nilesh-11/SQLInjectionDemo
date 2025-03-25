@@ -24,7 +24,7 @@ Ensure you have the following versions installed:
     ```sh
     "PostgreSQL 17.2 on x86_64-windows, compiled by msvc-19.42.34435, 64-bit"
     ```
-- Make sure you enter correct details in .env file in 
+- Make sure you enter correct database details in /Backend/.env file
     ```sh
     DBHOST=localhost
     DBPORT=5432
@@ -50,9 +50,9 @@ Ensure you have the following versions installed:
     ```
 
 ### Backend
-1. Navigate to the `app` directory:
+1. Navigate to the `Backend` directory:
     ```sh
-    cd app
+    cd Backend
     ```
 2. Install dependencies:
     ```sh
@@ -62,4 +62,3 @@ Ensure you have the following versions installed:
     ```sh
     python server.py
     ```
-
