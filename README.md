@@ -8,7 +8,7 @@ This site is vulnerable to SQL Injection.
 - [Docker Compose](https://docs.docker.com/compose/)
 
 ## Initialization
-- Enter Superuser and Webuser credentials in [docker-compose file](./docker-compose.yml) and [sql file](./Backend/init.sql)
+- Enter Superuser in [docker-compose file](./docker-compose.yml)
 
 ## Installation Instructions
 - Run `docker-compose up --build`
