@@ -1,0 +1,52 @@
+version: "3.8"
+
+services:
+  frontend:
+    build: ./app
+    container_name: sqlinjectiondemo_frontend
+    ports:
+      - "3000:3000"  # Map frontend port
+    depends_on:
+      - backend
+    volumes:
+      - ./app:/app
+      - /app/node_modules
+    environment:
+      - REACT_APP_SERVER_ADDRESS=http://backend:8080  # This works inside Docker
+
+  backend:
+    build: ./Backend  # This is the directory containing the FastAPI backend code
+    container_name: sqlinjectiondemo_backend
+    ports:
+      - "8080:8080"  # Map backend port
+    depends_on:
+      db:
+        condition: service_healthy 
+    environment:
+      DBHOST: db
+      DBPORT: 5432
+      DBNAME: postgres
+      DBUSER: postgres
+      DBPASSWORD: acoolpassword
+    volumes:
+      - ./Backend:/app
+
+  db:
+    image: postgres:17.2
+    container_name: sqlinjectiondemo_db
+    restart: always
+    environment:
+      POSTGRES_DB: Test
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: acoolpassword
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d Test"]
+      interval: 5s
+      retries: 5
+      start_period: 10s
+
+volumes:
+  db_data:
+    external: false  # Disable external volume persistence
